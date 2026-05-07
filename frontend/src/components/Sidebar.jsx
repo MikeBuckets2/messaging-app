@@ -27,7 +27,7 @@ export default function Sidebar({ activeConversationId, onSelectConversation }) 
             title="New conversation"
             onClick={() => setShowNewConvoModal(true)}
           >
-            Create
+            🆕
           </button>
         </div>
       </div>
@@ -70,10 +70,10 @@ export default function Sidebar({ activeConversationId, onSelectConversation }) 
           <div className="sidebar-user-status">Online</div>
         </div>
         <button className="icon-btn" title="Profile" onClick={() => navigate('/profile')}>
-          Profile
+          ⚙️
         </button>
         <button className="icon-btn" title="Logout" onClick={logout}>
-          Logout
+          🚪
         </button>
       </div>
 

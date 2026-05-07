@@ -82,7 +82,7 @@ export default function MessageInput({ conversationId, onSent }) {
           onClick={() => fileInputRef.current?.click()}
           style={{ color: 'var(--text-secondary)', flexShrink: 0 }}
         >
-          Attach image
+          📎
         </button>
 
         <textarea

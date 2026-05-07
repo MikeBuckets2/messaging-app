@@ -135,7 +135,7 @@ export default function NewConversationModal({ onClose, onCreated }) {
                 style={{ display: 'none' }}
                 onChange={(e) => setGroupAvatar(e.target.files[0])}
               />
-              Image {groupAvatar ? groupAvatar.name : 'Add group photo (optional)'}
+              📷 {groupAvatar ? groupAvatar.name : 'Add group photo (optional)'}
             </label>
             {groupMembers.length > 0 && (
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}>

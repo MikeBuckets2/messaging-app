@@ -40,7 +40,7 @@ export default function ConversationList({ activeId, onSelect }) {
         const lastMsg = convo.messages?.[0]
         const preview = lastMsg
           ? lastMsg.imageUrl
-            ? 'Image'
+            ? '📷 Image'
             : `${lastMsg.sender.id === user.id ? 'You: ' : ''}${lastMsg.text}`
           : 'No messages yet'
 
