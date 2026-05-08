@@ -7,7 +7,7 @@ import MessageInput from './MessageInput';
 const POLL_INTERVAL_MS = 3_000;
 const ONLINE_THRESHOLD_MS = 2 * 60 * 1000;
 
-export default function ChatWindow({ conversation }) {
+export default function ChatWindow({ conversation, onBack }) {
   const { user } = useAuth();
   const [messages, setMessages] = useState([]);
   const [loadingInitial, setLoadingInitial] = useState(true);
@@ -108,7 +108,18 @@ export default function ChatWindow({ conversation }) {
   return (
     <div className="chat-area">
       <div className="chat-header">
-        <Avatar user={headerAvatar} size={36} showOnline={!conversation.isGroup && partner && isOnline(partner.lastSeenAt)} />
+        <button
+          className="chat-back-btn"
+          onClick={onBack}
+          title="Back"
+        >
+          ←
+        </button>
+        <Avatar
+          user={headerAvatar}
+          size={36}
+          showOnline={!conversation.isGroup && partner && isOnline(partner.lastSeenAt)}
+        />
         <div className="chat-header-info">
           <div className="chat-header-name">{headerName}</div>
           {headerSub && <div className="chat-header-sub">{headerSub}</div>}
