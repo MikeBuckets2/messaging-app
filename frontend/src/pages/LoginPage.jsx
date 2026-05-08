@@ -27,8 +27,12 @@ export default function LoginPage() {
   return (
     <div className="auth-page">
       <div className="auth-card">
-        <h1>Welcome back</h1>
-        <p>Sign in to your account to continue.</p>
+        <div className="auth-brand">
+          <h1 className="auth-app-name">Echo</h1>
+          <p className="auth-tagline">Conversations that feel alive.</p>
+        </div>
+
+        <div className="auth-divider" />
 
         {error && <div className="error-msg">{error}</div>}
 

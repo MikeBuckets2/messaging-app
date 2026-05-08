@@ -28,8 +28,12 @@ export default function RegisterPage() {
   return (
     <div className="auth-page">
       <div className="auth-card">
-        <h1>Create account</h1>
-        <p>Join and start messaging today.</p>
+        <div className="auth-brand">
+          <h1 className="auth-app-name">Echo</h1>
+          <p className="auth-tagline">Conversations that feel alive.</p>
+        </div>
+
+        <div className="auth-divider" />
 
         {error && <div className="error-msg">{error}</div>}
 

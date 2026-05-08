@@ -6,7 +6,7 @@ import FriendsPanel from './FriendsPanel';
 import NewConversationModal from './NewConversationModal';
 import Avatar from './Avatar';
 
-export default function Sidebar({ activeConversationId, onSelectConversation }) {
+export default function Sidebar({ activeConversationId, onSelectConversation, onDeleteActiveConversation }) {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
   const [view, setView] = useState('chats');
@@ -20,7 +20,7 @@ export default function Sidebar({ activeConversationId, onSelectConversation }) 
   return (
     <aside className="sidebar">
       <div className="sidebar-header">
-        <span className="sidebar-logo">Messenger</span>
+        <span className="sidebar-logo">Echo</span>
         <div className="sidebar-actions">
           <button
             className="icon-btn"
@@ -32,7 +32,7 @@ export default function Sidebar({ activeConversationId, onSelectConversation }) 
         </div>
       </div>
 
-      <div style={{ display: 'flex', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
+      <div style={{ display: 'flex', borderBottom: '1px solid rgba(255,255,255,0.05)', flexShrink: 0 }}>
         {['chats', 'friends'].map((tab) => (
           <button
             key={tab}
@@ -57,6 +57,7 @@ export default function Sidebar({ activeConversationId, onSelectConversation }) 
           <ConversationList
             activeId={activeConversationId}
             onSelect={onSelectConversation}
+            onDelete={onDeleteActiveConversation}
           />
         ) : (
           <FriendsPanel onStartDm={onSelectConversation} />
