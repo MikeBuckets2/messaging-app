@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Trash2, Camera } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { getMyConversations, deleteConversation } from '../api/conversations';
 import Avatar from './Avatar';
@@ -53,7 +54,7 @@ export default function ConversationList({ activeId, onSelect, onDelete }) {
         const lastMsg = convo.messages?.[0]
         const preview = lastMsg
           ? lastMsg.imageUrl
-            ? '📷 Image'
+            ? <Camera size={15} />
             : `${lastMsg.sender.id === user.id ? 'You: ' : ''}${lastMsg.text}`
           : 'No messages yet'
 
@@ -76,7 +77,7 @@ export default function ConversationList({ activeId, onSelect, onDelete }) {
                 onClick={(e) => handleDelete(e, convo.id)}
                 title="Delete conversation"
               >
-                🗑
+                <Trash2 size={15} />
               </button>
             )}
           </div>

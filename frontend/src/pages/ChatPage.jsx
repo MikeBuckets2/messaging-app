@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Sidebar from '../components/Sidebar';
 import ChatWindow from '../components/ChatWindow';
+import { MessageCircleMore } from 'lucide-react';
 
 export default function ChatPage() {
   const [activeConversation, setActiveConversation] = useState(null);
@@ -39,7 +40,9 @@ export default function ChatPage() {
           />
         ) : (
           <div className="chat-area chat-empty">
-            <div className="chat-empty-icon">💬</div>
+            <div className="chat-empty-icon">
+              <MessageCircleMore size={56} />
+            </div>
             <h2>Your messages</h2>
             <p className="text-muted">Select a conversation or start a new one.</p>
           </div>

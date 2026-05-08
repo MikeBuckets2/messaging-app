@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
+import { Check, X, UserMinus } from 'lucide-react';
 import { getFriends, getFriendRequests, respondToRequest, removeFriend } from '../api/friends';
 import { createConversation } from '../api/conversations';
 import Avatar from './Avatar';
@@ -122,9 +123,8 @@ export default function FriendsPanel({ onStartDm }) {
                   e.stopPropagation()
                   handleRemoveFriend(friend.friendshipId)
                 }}
-                style={{ fontSize: '0.8rem' }}
               >
-                ✕
+                <UserMinus size={16} />
               </button>
             </div>
           ))
@@ -148,15 +148,17 @@ export default function FriendsPanel({ onStartDm }) {
                     className="btn-sm"
                     onClick={() => handleRespond(req.id, 'accept')}
                     title="Accept"
+                    style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}
                   >
-                    ✓
+                    <Check size={13} /> Accept
                   </button>
                   <button
                     className="btn-sm danger"
                     onClick={() => handleRespond(req.id, 'decline')}
                     title="Decline"
+                    style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}
                   >
-                    ✕
+                    <X size={13} /> Decline
                   </button>
                 </div>
               </div>

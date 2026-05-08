@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { SquarePen, Settings, LogOut } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import ConversationList from './ConversationList';
 import FriendsPanel from './FriendsPanel';
@@ -27,7 +28,7 @@ export default function Sidebar({ activeConversationId, onSelectConversation, on
             title="New conversation"
             onClick={() => setShowNewConvoModal(true)}
           >
-            🆕
+            <SquarePen size={18} />
           </button>
         </div>
       </div>
@@ -71,10 +72,10 @@ export default function Sidebar({ activeConversationId, onSelectConversation, on
           <div className="sidebar-user-status">Online</div>
         </div>
         <button className="icon-btn" title="Profile" onClick={() => navigate('/profile')}>
-          ⚙️
+          <Settings size={18} />
         </button>
         <button className="icon-btn" title="Logout" onClick={logout}>
-          🚪
+          <LogOut size={18} />
         </button>
       </div>
 

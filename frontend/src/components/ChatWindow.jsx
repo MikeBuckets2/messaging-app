@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
+import { ArrowLeft } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { getMessages } from '../api/messages';
 import Avatar from './Avatar';
@@ -108,12 +109,8 @@ export default function ChatWindow({ conversation, onBack }) {
   return (
     <div className="chat-area">
       <div className="chat-header">
-        <button
-          className="chat-back-btn"
-          onClick={onBack}
-          title="Back"
-        >
-          ←
+        <button className="chat-back-btn" onClick={onBack} title="Back">
+          <ArrowLeft size={20} />
         </button>
         <Avatar
           user={headerAvatar}

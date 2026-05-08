@@ -1,4 +1,5 @@
 import { useState, useRef } from 'react';
+import { Paperclip, Send, X } from 'lucide-react';
 import { sendMessage } from '../api/messages';
 
 export default function MessageInput({ conversationId, onSent }) {
@@ -62,7 +63,7 @@ export default function MessageInput({ conversationId, onSent }) {
         <div className="image-preview">
           <img src={preview} alt="Preview" />
           <button className="image-preview-remove" onClick={clearImage}>
-            ✕
+            <X size={11} />
           </button>
         </div>
       )}
@@ -82,7 +83,7 @@ export default function MessageInput({ conversationId, onSent }) {
           onClick={() => fileInputRef.current?.click()}
           style={{ color: 'var(--text-secondary)', flexShrink: 0 }}
         >
-          📎
+          <Paperclip size={18} />
         </button>
 
         <textarea
@@ -103,7 +104,7 @@ export default function MessageInput({ conversationId, onSent }) {
           disabled={(!text.trim() && !image) || sending}
           title="Send"
         >
-          {sending ? '…' : '➤'}
+          <Send size={15} />
         </button>
       </div>
     </div>

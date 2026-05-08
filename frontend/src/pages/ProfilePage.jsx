@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { ArrowLeft, Camera } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { updateMe } from '../api/users';
 import Avatar from '../components/Avatar';
@@ -73,9 +74,8 @@ export default function ProfilePage() {
           className="icon-btn"
           title="Back to chats"
           onClick={() => navigate('/')}
-          style={{ fontSize: '1.2rem' }}
         >
-          ←
+          <ArrowLeft size={20} />
         </button>
       </aside>
 
@@ -102,7 +102,9 @@ export default function ProfilePage() {
                   <label
                     className="profile-avatar-label"
                     onClick={() => avatarInputRef.current?.click()}
+                    style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', cursor: 'pointer' }}
                   >
+                    <Camera size={15} />
                     {avatarFile ? avatarFile.name : 'Change photo'}
                   </label>
                   <p className="text-muted" style={{ marginTop: '0.3rem', fontSize: '0.78rem' }}>
