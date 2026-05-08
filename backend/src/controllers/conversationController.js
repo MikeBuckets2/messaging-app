@@ -56,13 +56,43 @@ const createConversation = asyncHandler(async (req, res) => {
 
   if (type === 'dm') {
     return createDm(req, res, recipientId);
-  }
+  };
 
   if (type === 'group') {
     return createGroup(req, res, name, memberIds);
-  }
+  };
 
   return res.status(400).json({ message: 'type must be "dm" or "group".' });
+});
+
+const deleteConversation = asyncHandler(async (req, res) => {
+  const { id: conversationId } = req.params;
+
+  const membership = await prisma.conversationMember.findUnique({
+    where: {
+      userId_conversationId: { userId: req.user.id, conversationId },
+    },
+  });
+
+  if (!membership) {
+    return res.status(404).json({ message: 'Conversation not found in your inbox.' });
+  };
+
+  await prisma.conversationMember.delete({
+    where: {
+      userId_conversationId: { userId: req.user.id, conversationId },
+    },
+  });
+
+  const remainingMembers = await prisma.conversationMember.count({
+    where: { conversationId },
+  });
+
+  if (remainingMembers === 0) {
+    await prisma.conversation.delete({ where: { id: conversationId } });
+  };
+
+  res.json({ message: 'Conversation removed from your inbox.' });
 });
 
 const addGroupMember = asyncHandler(async (req, res) => {
@@ -155,7 +185,7 @@ const createGroup = async (req, res, name, memberIds) => {
   if (req.file) {
     const result = await uploadBuffer(req.file.buffer, 'messaging-app/groups');
     avatarUrl = result.secure_url;
-  }
+  };
 
   const conversation = await prisma.conversation.create({
     data: {
@@ -165,7 +195,7 @@ const createGroup = async (req, res, name, memberIds) => {
       members: {
         create: allMemberIds.map((uid) => ({
           userId: uid,
-          isAdmin: uid === req.user.id, // creator is admin
+          isAdmin: uid === req.user.id,
         })),
       },
     },
@@ -195,6 +225,7 @@ module.exports = {
   getMyConversations,
   getConversationById,
   createConversation,
+  deleteConversation,
   addGroupMember,
   removeGroupMember,
 };
