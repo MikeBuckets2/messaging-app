@@ -236,7 +236,7 @@ export default function NewConversationModal({ onClose, onCreated }) {
                 style={{ width: 'auto', marginTop: 0 }}
                 onClick={() => setGroupMode(true)}
               >
-                New Group Instead
+                New Group
               </button>
             )
           )}
