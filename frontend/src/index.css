@@ -80,6 +80,8 @@ a {
   align-items: center;
   justify-content: center;
   background: var(--sidebar-bg);
+  padding: 1rem;
+  overflow-y: auto;
 }
 
 .auth-card {
@@ -91,15 +93,36 @@ a {
   box-shadow: 0 20px 60px rgba(0,0,0,0.3);
 }
 
-.auth-card h1 {
-  font-size: 1.6rem;
-  font-weight: 700;
-  margin-bottom: 0.25rem;
+.auth-brand {
+  text-align: center;
+  margin-bottom: 1.5rem;
 }
 
-.auth-card p {
+.auth-logo {
+  font-size: 2.8rem;
+  margin-bottom: 0.4rem;
+  line-height: 1;
+}
+
+.auth-app-name {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--accent);
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.auth-tagline {
   color: var(--text-secondary);
-  margin-bottom: 1.75rem;
+  font-size: 0.9rem;
+  margin-top: 0.35rem;
+  font-style: italic;
+}
+
+.auth-divider {
+  height: 1px;
+  background: var(--border);
+  margin-bottom: 1.5rem;
 }
 
 .form-group {
@@ -176,6 +199,19 @@ a {
   overflow: hidden;
 }
 
+.sidebar-wrapper {
+  display: flex;
+  flex-shrink: 0;
+  width: 280px;
+}
+
+.chat-wrapper {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+}
+
 /* Sidebar */
 
 .sidebar {
@@ -185,6 +221,8 @@ a {
   display: flex;
   flex-direction: column;
   border-right: 1px solid rgba(255,255,255,0.05);
+  height: 100vh;
+  overflow: hidden;
 }
 
 .sidebar-header {
@@ -193,6 +231,7 @@ a {
   justify-content: space-between;
   padding: 1rem 1.25rem;
   border-bottom: 1px solid rgba(255,255,255,0.05);
+  flex-shrink: 0;
 }
 
 .sidebar-logo {
@@ -216,6 +255,7 @@ a {
   justify-content: center;
   transition: background 0.15s, color 0.15s;
   font-size: 1.15rem;
+  flex-shrink: 0;
 }
 
 .icon-btn:hover {
@@ -223,19 +263,10 @@ a {
   color: var(--sidebar-text-hi);
 }
 
-.sidebar-section-label {
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--sidebar-text);
-  padding: 1rem 1.25rem 0.4rem;
-}
-
 .sidebar-scroll {
   flex: 1;
   overflow-y: auto;
-  padding-bottom: 0.5rem;
+  min-height: 0;
 }
 
 .sidebar-scroll::-webkit-scrollbar { 
@@ -252,6 +283,7 @@ a {
   display: flex;
   align-items: center;
   gap: 0.75rem;
+  flex-shrink: 0;
 }
 
 .sidebar-user-info {
@@ -282,7 +314,7 @@ a {
   padding: 0.6rem 1.25rem;
   cursor: pointer;
   transition: background 0.15s;
-  border-radius: 0;
+  position: relative;
 }
 
 .convo-item:hover { 
@@ -313,6 +345,20 @@ a {
   overflow: hidden;
   text-overflow: ellipsis;
   margin-top: 0.15rem;
+}
+
+.convo-delete-btn {
+  font-size: 0.85rem;
+  opacity: 0.6;
+  padding: 0.2rem 0.35rem;
+  border-radius: var(--radius-sm);
+  transition: opacity 0.15s, background 0.15s;
+  flex-shrink: 0;
+}
+
+.convo-delete-btn:hover { 
+  opacity: 1; 
+  background: rgba(231,76,60,0.2); 
 }
 
 /* Avatar */
@@ -354,6 +400,7 @@ a {
   flex-direction: column;
   background: var(--chat-bg);
   overflow: hidden;
+  min-width: 0;
 }
 
 .chat-empty {
@@ -385,6 +432,22 @@ a {
   align-items: center;
   gap: 0.85rem;
   min-height: 60px;
+  flex-shrink: 0;
+}
+
+.chat-back-btn {
+  display: none;
+  color: var(--accent);
+  font-size: 1.2rem;
+  font-weight: 600;
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-sm);
+  transition: background 0.15s;
+  flex-shrink: 0;
+}
+
+.chat-back-btn:hover { 
+  background: rgba(91,95,199,0.1); 
 }
 
 .chat-header-info { 
@@ -410,6 +473,7 @@ a {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
+  min-height: 0;
 }
 
 .messages-list::-webkit-scrollbar { 
@@ -472,8 +536,8 @@ a {
 }
 
 .bubble img {
-  max-width: 280px;
-  max-height: 320px;
+  max-width: 240px;
+  max-height: 280px;
   border-radius: var(--radius-sm);
   object-fit: cover;
 }
@@ -498,6 +562,7 @@ a {
   background: var(--input-bg);
   border-top: 1px solid var(--border);
   padding: 0.85rem 1.25rem;
+  flex-shrink: 0;
 }
 
 .message-input-row {
@@ -624,6 +689,7 @@ a {
   align-items: center;
   justify-content: center;
   z-index: 100;
+  padding: 1rem;
 }
 
 .modal {
@@ -633,7 +699,7 @@ a {
   width: 100%;
   max-width: 460px;
   box-shadow: 0 20px 60px rgba(0,0,0,0.25);
-  max-height: 80vh;
+  max-height: 85vh;
   overflow-y: auto;
 }
 
@@ -723,6 +789,7 @@ a {
   border: 1.5px solid var(--accent);
   color: var(--accent);
   transition: background 0.15s, color 0.15s;
+  white-space: nowrap;
 }
 
 .btn-sm:hover { 
@@ -743,6 +810,7 @@ a {
   justify-content: flex-end;
   gap: 0.6rem;
   margin-top: 1.25rem;
+  flex-wrap: wrap;
 }
 
 .btn-secondary {
@@ -766,13 +834,14 @@ a {
   flex-direction: column;
   background: var(--chat-bg);
   overflow-y: auto;
+  height: 100vh;
 }
 
 .profile-inner {
   max-width: 560px;
   width: 100%;
   margin: 0 auto;
-  padding: 2.5rem 1.5rem;
+  padding: 2rem 1.5rem;
 }
 
 .profile-inner h1 {
@@ -874,8 +943,6 @@ a {
   margin-bottom: 1rem;
 }
 
-/* Misc utilities */
-
 .flex-center { 
   display: flex; 
   align-items: center; 
@@ -892,4 +959,84 @@ a {
   height: 1px; 
   background: var(--border); 
   margin: 0.75rem 0; 
+}
+
+/* Responsive — Tablet (768px) */
+
+@media (max-width: 768px) {
+  .app-shell {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .sidebar-wrapper {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    z-index: 10;
+    transition: transform 0.25s ease, opacity 0.25s ease;
+  }
+
+  .chat-wrapper {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    z-index: 10;
+    transition: transform 0.25s ease, opacity 0.25s ease;
+  }
+
+  .sidebar-wrapper.mobile-hidden {
+    transform: translateX(-100%);
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .chat-wrapper.mobile-hidden {
+    transform: translateX(100%);
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .sidebar-wrapper.mobile-visible,
+  .chat-wrapper.mobile-visible {
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+  .sidebar {
+    width: 100%;
+    min-width: unset;
+  }
+
+  .chat-back-btn {
+    display: flex;
+  }
+
+  .message-row {
+    max-width: 88%;
+  }
+
+  .auth-card {
+    padding: 2rem 1.25rem;
+  }
+
+  .profile-inner {
+    padding: 1.25rem 1rem;
+  }
+}
+
+/* Responsive — small phones (480px) */
+
+@media (max-width: 480px) {
+  .auth-app-name { font-size: 1.75rem; }
+  .auth-logo { font-size: 2.2rem; }
+
+  .message-input-area {
+    padding: 0.65rem 0.85rem;
+  }
+
+  .bubble img {
+    max-width: 200px;
+    max-height: 220px;
+  }
 }
