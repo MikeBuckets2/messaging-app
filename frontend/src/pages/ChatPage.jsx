@@ -4,26 +4,47 @@ import ChatWindow from '../components/ChatWindow';
 
 export default function ChatPage() {
   const [activeConversation, setActiveConversation] = useState(null);
+  const [showChat, setShowChat] = useState(false);
+
+  const handleSelectConversation = (convo) => {
+    setActiveConversation(convo);
+    setShowChat(true);
+  };
+
+  const handleBackToSidebar = () => {
+    setShowChat(false);
+  };
+
+  const handleDeleteActive = () => {
+    setActiveConversation(null);
+    setShowChat(false);
+  };
 
   return (
     <div className="app-shell">
-      <Sidebar
-        activeConversationId={activeConversation?.id}
-        onSelectConversation={setActiveConversation}
-      />
-
-      {activeConversation ? (
-        <ChatWindow
-          key={activeConversation.id}
-          conversation={activeConversation}
+      <div className={`sidebar-wrapper ${showChat ? 'mobile-hidden' : 'mobile-visible'}`}>
+        <Sidebar
+          activeConversationId={activeConversation?.id}
+          onSelectConversation={handleSelectConversation}
+          onDeleteActiveConversation={handleDeleteActive}
         />
-      ) : (
-        <div className="chat-area chat-empty">
-          <div className="chat-empty-icon">💬</div>
-          <h2>Your messages</h2>
-          <p className="text-muted">Select a conversation or start a new one.</p>
-        </div>
-      )}
+      </div>
+
+      <div className={`chat-wrapper ${!showChat ? 'mobile-hidden' : 'mobile-visible'}`}>
+        {activeConversation ? (
+          <ChatWindow
+            key={activeConversation.id}
+            conversation={activeConversation}
+            onBack={handleBackToSidebar}
+          />
+        ) : (
+          <div className="chat-area chat-empty">
+            <div className="chat-empty-icon">💬</div>
+            <h2>Your messages</h2>
+            <p className="text-muted">Select a conversation or start a new one.</p>
+          </div>
+        )}
+      </div>
     </div>
   )
 };
