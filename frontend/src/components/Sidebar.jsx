@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { SquarePen, Settings, LogOut } from 'lucide-react';
+import { Plus, Settings, LogOut } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import ConversationList from './ConversationList';
 import FriendsPanel from './FriendsPanel';
@@ -28,7 +28,7 @@ export default function Sidebar({ activeConversationId, onSelectConversation, on
             title="New conversation"
             onClick={() => setShowNewConvoModal(true)}
           >
-            <SquarePen size={18} />
+            <Plus size={18} />
           </button>
         </div>
       </div>
