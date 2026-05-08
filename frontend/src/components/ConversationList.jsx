@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { getMyConversations } from '../api/conversations';
+import { getMyConversations, deleteConversation } from '../api/conversations';
 import Avatar from './Avatar';
 
 const POLL_INTERVAL_MS = 5_000;
 
-export default function ConversationList({ activeId, onSelect }) {
+export default function ConversationList({ activeId, onSelect, onDelete }) {
   const { user } = useAuth();
   const [conversations, setConversations] = useState([]);
+  const [hoveredId, setHoveredId] = useState(null);
 
   const fetchConversations = async () => {
     try {
@@ -23,6 +24,18 @@ export default function ConversationList({ activeId, onSelect }) {
     const interval = setInterval(fetchConversations, POLL_INTERVAL_MS);
     return () => clearInterval(interval);
   }, []);
+
+  const handleDelete = async (e, convoId) => {
+    e.stopPropagation();
+    if (!confirm('Remove this conversation from your inbox?')) return;
+    try {
+      await deleteConversation(convoId);
+      setConversations((prev) => prev.filter((c) => c.id !== convoId));
+      if (activeId === convoId) onDelete();
+    } catch (err) {
+      console.error(err);
+    };
+  };
 
   if (conversations.length === 0) {
     return (
@@ -49,12 +62,23 @@ export default function ConversationList({ activeId, onSelect }) {
             key={convo.id}
             className={`convo-item ${activeId === convo.id ? 'active' : ''}`}
             onClick={() => onSelect(convo)}
+            onMouseEnter={() => setHoveredId(convo.id)}
+            onMouseLeave={() => setHoveredId(null)}
           >
             <Avatar user={convo.isGroup ? groupAvatar(convo) : otherUser} size={38} />
             <div className="convo-info">
               <div className="convo-name">{displayName}</div>
               <div className="convo-preview">{preview}</div>
             </div>
+            {hoveredId === convo.id && (
+              <button
+                className="convo-delete-btn"
+                onClick={(e) => handleDelete(e, convo.id)}
+                title="Delete conversation"
+              >
+                🗑
+              </button>
+            )}
           </div>
         )
       })}
